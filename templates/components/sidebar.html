@@ -1,0 +1,141 @@
+<aside
+    :x-show="collapsed? 'w-16' : 'w-64'"
+    class="bg-sky-600  text-white flex flex-col h-screen transition-all duration-300">
+    <div class="h-16 flex items-center px-6  border-b border-sky-800">
+        <span x-show="!collapsed" class="text-lg font-bold tracking-tight uppercase text-center">SuperBiz</span>
+        <span x-show="collapsed" class="text-lg font-bold tracking-tight uppercase text-center">B</span>
+        </div>
+    
+    <nav
+    :x-show="collapsed? 'w-16' : 'w-64'" 
+    class="flex-1 mt-4 flex flex-col">
+        <a href="#" x-show="!collapsed" class="block py-3 px-6 hover:bg-sky-600 transition-colors">Dashboard</a>
+        <details class="group outline-none">
+            <summary class="flex items-center justify-between py-3 px-6 cursor-pointer hover:bg-sky-600 list-none">
+                <div class="flex items-center space-x-3">
+                    <span x-show="collapsed" class="w-5 text-center">{% include 'components/svgs/sidebar/msetup.svg' %}</span>
+                    <span x-show="!collapsed"class="w-5 text-center">{% include 'components/svgs/sidebar/msetup.svg' %}</span>
+                    <span x-show="!collapsed">Master Data</span>
+                </div>
+                <span x-show="!collapsed" class="transition-transform group-open:rotate-180">{% include 'components/svgs/sidebar/menu_arrow.svg' %}</span>
+            </summary>
+            <div class="bg-black/10">
+                <a href="#" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">Category</a>
+                <a href="#" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">Units</a>
+                <a href="#" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">Currency</a>
+                <a href="#" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">Item</a>
+            </div>
+        </details>
+        <!-- Transaction -->
+        <details class="group outline-none">
+            <summary class="flex items-center justify-between py-3 px-6 cursor-pointer hover:bg-sky-600 list-none">
+                <div class="flex items-center space-x-3">
+                     <span x-show="collapsed" class="w-5 text-center">{% include 'components/svgs/sidebar/transaction.svg' %}</span>
+                    <span x-show="!collapsed" class="w-5 text-center">{% include 'components/svgs/sidebar/transaction.svg' %}</span>
+                    <span x-show="!collapsed">Transaction</span>
+                </div>
+                <span x-show="!collapsed" class="transition-transform group-open:rotate-180">{% include 'components/svgs/sidebar/menu_arrow.svg' %}</span>
+            </summary>
+            <div class="bg-black/10 ml-4 border-l border-sky-400/30">
+                <details class="group outline-none">
+                    <summary class="flex items-center justify-between py-2 pl-6 pr-6 cursor-pointer hover:bg-sky-600 list-none text-sm">
+                        <span>Inventory</span>
+                        <span class="transition-transform group-open:rotate-180">{% include 'components/svgs/sidebar/menu_arrow.svg' %}</span>
+                    </summary>
+                    <div class="ml-4 border-l border-sky-400/30">
+                        <details class="group outline-none">
+                            <summary class="flex items-center justify-between py-2 pl-6 pr-6 cursor-pointer hover:bg-sky-600 list-none text-xs">
+                                <div class="flex items-center space-x-3">
+                                    <span>{% include 'components/svgs/sidebar/card-sim.svg' %}</span>
+                                    <span>GRN</span>
+                                </div>
+                                <span class="transition-transform group-open:rotate-180 text-[10px]">▼</span>
+                            </summary>
+                            <div class="bg-black/20">
+                                <a href="#" class="block py-2 pl-12 text-xs hover:bg-sky-600">PO GRN</a>
+                                <a href="#" class="block py-2 pl-12 text-xs hover:bg-sky-600">Direct GRN</a>
+                            </div>
+                        </details>
+                        <details class="group outline-none">
+                            <summary class="flex items-center justify-between py-2 pl-6 pr-6 cursor-pointer hover:bg-sky-600 list-none text-xs">
+                                <div class="flex items-center space-x-3">
+                                    <span>{% include 'components/svgs/sidebar/card-sim.svg' %}</span>
+                                    <span>Stock</span>
+                                </div>
+                                <span class="transition-transform group-open:rotate-180 text-[10px]">▼</span>
+                            </summary>
+                            <div class="bg-black/20">
+                                <a href="#" class="block py-2 pl-12 text-xs hover:bg-sky-600">Current Stock</a>
+                                <a href="#" class="block py-2 pl-12 text-xs hover:bg-sky-600">Stock Adjustment</a>
+                            </div>
+                        </details>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <!-- Reports -->
+        <details class="group outline-none">
+            <summary class="flex items-center justify-between py-3 px-6 cursor-pointer hover:bg-sky-600 list-none">
+                <div class="flex items-center space-x-3">
+                    <span x-show="collapsed" class="w-5 text-center">{% include 'components/svgs/sidebar/clipboard-minus.svg' %}</span>
+                    <span x-show="!collapsed" class="w-5 text-center">{% include 'components/svgs/sidebar/clipboard-minus.svg' %}</span>
+                    <span x-show="!collapsed">Reports</span>
+                </div>
+                <span x-show="!collapsed" class="transition-transform group-open:rotate-180">{% include 'components/svgs/sidebar/menu_arrow.svg' %}</span>
+            </summary>
+            <div class="bg-black/10 ml-4 border-l border-sky-400/30">
+                <details class="group outline-none">
+                    <summary class="flex items-center justify-between py-2 pl-6 pr-6 cursor-pointer hover:bg-sky-600 list-none text-sm">
+                        <span>Sales</span>
+                        <span class="transition-transform group-open:rotate-180">{% include 'components/svgs/sidebar/menu_arrow.svg' %}</span>
+                    </summary>
+                    <div class="ml-4 border-l border-sky-400/30">
+                        <details class="group outline-none">
+                            <summary class="flex items-center justify-between py-2 pl-6 pr-6 cursor-pointer hover:bg-sky-600 list-none text-xs">
+                                <div class="flex items-center space-x-3">
+                                    <span>{% include 'components/svgs/sidebar/card-sim.svg' %}</span>
+                                    <span>Sales Summery</span>
+                                </div>
+                                <span class="transition-transform group-open:rotate-180 text-[10px]">▼</span>
+                            </summary>
+                            <div class="bg-black/20">
+                                <a href="#" class="block py-2 pl-12 text-xs hover:bg-sky-600">Daily Sales Summary</a>
+                                <a href="#" class="block py-2 pl-12 text-xs hover:bg-sky-600">Monthly Sales Overview</a>
+                            </div>
+                        </details>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <!-- User -->
+        <details class="group outline-none">
+            <summary class="flex items-center justify-between py-3 px-6 cursor-pointer hover:bg-sky-600 list-none">
+                <div class="flex items-center space-x-3">
+                     <span x-show="collapsed" class="w-5 text-center">{% include 'components/svgs/sidebar/user.svg' %}</span>
+                    <span x-show="!collapsed" class="w-5 text-center">{% include 'components/svgs/sidebar/user.svg' %}</span>
+                    <span x-show="!collapsed">User</span>
+                </div>
+                <span x-show="!collapsed"class="transition-transform group-open:rotate-180">{% include 'components/svgs/sidebar/menu_arrow.svg' %}</span>
+            </summary>
+            <div class="bg-black/10">
+                <a href="#" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">New User</a>
+                <a href="#" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">User Role</a>
+            </div>
+        </details>
+        <!-- Settings -->
+        <details class="group outline-none">
+            <summary class="flex items-center justify-between py-3 px-6 cursor-pointer hover:bg-sky-600 list-none">
+                <div class="flex items-center space-x-3">
+                    <span x-show="collapsed" class="w-5 text-center">{% include 'components/svgs/sidebar/settings.svg' %}</span>
+                    <span x-show="!collapsed" class="w-5 text-center">{% include 'components/svgs/sidebar/settings.svg' %}</span>
+                    <span x-show="!collapsed">Settings</span>
+                </div>
+                <span x-show="!collapsed"class="transition-transform group-open:rotate-180">{% include 'components/svgs/sidebar/menu_arrow.svg' %}</span>
+            </summary>
+            <div class="bg-black/10">
+                <a href="#" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">Setting 1</a>
+                <a href="#" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">Setting 2</a>
+            </div>
+        </details>
+    </nav>
+</aside>

@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/* header styles */
+.header {
+  @apply sticky top-0 z-10 h-16 flex items-center justify-between px-6 bg-white border-b border-gray-200;
+}
+
+.icon-bread-crumbs {
+  @apply flex items-center space-x-3 text-gray-600 font-medium;
+}
+.btn-icon-bread-crumb {
+  @apply p-2 items-center;
+}
+.header-button {
+  @apply bg-gray-200 p-2 rounded-full items-center;
+}
+
+.outline-avatar {
+  @apply relative flex justify-end items-center gap-4;
+}
+
+.user-profile-dropdown {
+  @apply absolute right-0 top-full w-48 z-50 bg-white border border-gray-200 rounded-xl shadow-xl;
+}
+
+.header-user-info {
+  @apply hidden sm:block text-sm font-medium;
+}
+
+.header-user-avatar {
+  @apply flex items-center gap-10 focus:outline-none w-10 h-10 bg-blue-500 rounded-full;
+}
+
+/*  sign up buttons */
+.nav-link {
+  @apply hidden md:flex items-center gap-3;
+}
+.btn-login {
+  @apply text-sm text-gray-600 font-semibold hover:text-gray-900 hover:font-bold;
+}
+
+.btn-signup {
+  @apply text-sm px-4 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-900 transition;
+}
+.body-outline {
+  @apply bg-gray-50;
+}
+/* sidebar styles*/
+
+/* register styles */

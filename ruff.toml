@@ -1,0 +1,10 @@
+target-version = "py313"
+line-length = 100
+
+[lint]
+select = ["E", "F", "I"] # E=pycodestyle, F=pyflakes, I=import sorting
+ignore = ["E501"] # Ignore long lines for now
+
+[format]
+quote-style = "double"
+indent-style = "space"

@@ -1,0 +1,42 @@
+<header class="header ">
+    <div  class="icon-bread-crumbs">
+      <button @click="collapsed = !collapsed" class="btn-icon-bread-crumb"><span>{% include 'components/svgs/sidebar/text-align-justify.svg' %}</span></button>  
+    </div>
+    <!-- sign up buttons -->
+    <div class="nav-link">
+        <a href="" class="btn-login">Login</a>
+        <a href="" class="btn-signup">Sign up</a>
+    </div>
+     <!-- nav bar -->
+    <div class="flex items-center space-x-3">
+        <div>  
+            <span class="header-user-info">
+                Hi User
+            </span>
+        </div>
+        <button class="header-button">
+            <span>
+                {% include 'components/svgs/sidebar/bell-ring.svg' %}
+            </span>
+        </button>
+        
+
+        <div class="outline-avator" x-data="{ open: false }" @click.away="open = false">
+            <button class="header-user-avatar" @click="open = !open">
+                <img class="w-10 h-10 rounded-full" src="https://i.pravatar.cc/300" alt="User Avatar" width="40" height="40">
+            </button>
+
+            <div class="user-profile-dropdown" x-show="open">
+                <div class="divide-x divide-gray-200">
+                    <div class="py-4 flex flex-col px-6">
+                        <a href="#" class="nav-profle-link">Profile</a>
+                        
+                        <div class="border-t border-gray-200 shadow-md my-2"></div>
+                        
+                        <a href="#" class="nav-profle-link">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
