@@ -15,6 +15,22 @@
                 <div class="flex items-center space-x-3">
                     <span x-show="collapsed" class="w-5 text-center">{% include 'components/svgs/sidebar/msetup.svg' %}</span>
                     <span x-show="!collapsed"class="w-5 text-center">{% include 'components/svgs/sidebar/msetup.svg' %}</span>
+                    <span x-show="!collapsed">Administration</span>
+                </div>
+                <span x-show="!collapsed" class="transition-transform group-open:rotate-180">{% include 'components/svgs/sidebar/menu_arrow.svg' %}</span>
+            </summary>
+            <div class="bg-black/10">
+                <a href="{% url 'catalog:company_list' %}" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">Company</a>
+                <a href="#" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">Sales</a>
+                <!-- <a href="#" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">Currency</a>
+                <a href="#" class="block py-2 pl-14 pr-6 text-sm hover:bg-sky-600">Item</a> -->
+            </div>
+        </details>
+        <details class="group outline-none">
+            <summary class="flex items-center justify-between py-3 px-6 cursor-pointer hover:bg-sky-600 list-none">
+                <div class="flex items-center space-x-3">
+                    <span x-show="collapsed" class="w-5 text-center">{% include 'components/svgs/sidebar/msetup.svg' %}</span>
+                    <span x-show="!collapsed"class="w-5 text-center">{% include 'components/svgs/sidebar/msetup.svg' %}</span>
                     <span x-show="!collapsed">Master Data</span>
                 </div>
                 <span x-show="!collapsed" class="transition-transform group-open:rotate-180">{% include 'components/svgs/sidebar/menu_arrow.svg' %}</span>

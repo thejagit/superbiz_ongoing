@@ -22,9 +22,9 @@ from django.urls import include, path
 from apps.accounts.views import index
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    #path('accounts/', include('accounts.urls')),
-    path('', index, name='index'),
+    path("admin/", admin.site.urls),
+    path("catalog/", include("apps.catalog.urls", namespace="catalog")),
+    path("", index, name="index"),
 ]
 
 if settings.DEBUG:

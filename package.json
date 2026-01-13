@@ -3,10 +3,10 @@
     "@tailwindcss/cli": "^4.1.18",
     "tailwindcss": "^4.1.18"
   },
-
   "scripts": {
     "start": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
+  },
+  "devDependencies": {
+    "daisyui": "^5.5.14"
   }
 }
-
-  

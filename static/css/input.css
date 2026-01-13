@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@plugin "daisyui";
 /* header styles */
 .header {
   @apply sticky top-0 z-10 h-16 flex items-center justify-between px-6 bg-white border-b border-gray-200;
