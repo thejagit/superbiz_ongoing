@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block content %}        
+<div class="p-6 bg-gray-50 min-h-screen">
+    <main class="flex-1 p-8">
+        <header class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-800 uppercase tracking-wider">Edit Company - {{ form.company_name}}</h1>
+            <p class="text-sm text-gray-500">Update company identities and financial defaults.</p>
+        </header>
+
+        <form method="post" enctype="multipart/form-data"class="space-y-6 max-w-6xl">
+            {% csrf_token %}
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 items-start">
+                
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <div class="card bg-white shadow-sm border border-gray-100">
+                        <div class="card-body p-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <h2 class="text-sky-600 font-bold text-sm uppercase tracking-wider">Basic Information</h2>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xs font-semibold text-gray-500">Active Status</span>
+                                    <input type="checkbox" name="company_active" class="toggle toggle-primary toggle-sm" {% if form.company_active.value %}checked{% endif %} />
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col md:flex-row gap-8">
+                                <div class="flex flex-col items-center space-y-4">
+                                    <div class="avatar">
+                                        <div class="ring-primary ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2">
+                                            <img src=""  alt="logo" class="w-full h-full object-cover"/>
+                                        </div>
+                                    </div>
+                                    <input type="file" name="logo" class="file-input file-input-bordered file-input-xs w-full max-w-37.5" />
+                                </div>
+
+                                <div class="grow space-y-4">
+                                    <div class="grid grid-cols-2 gap-x-6 gap-y-1">
+                                        <div class="form-control">
+                                            <label class="label pb-0">
+                                                <span class="label-text font-bold text-gray-600">Company Code</span>
+                                            </label>
+                                            <input type="text" name="company_code" placeholder="COMP01" value="{{ form.company_code.value|default_if_none:'' }}" class="input input-bordered h-10 w-full" />
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label pb-0">
+                                                <span class="label-text font-bold text-gray-600">BP Code</span>
+                                            </label>
+                                            <input type="text" name="company_bpcode" placeholder="BP001" class="input input-bordered h-10 w-full" value="{{ form.company_bpcode.value|default_if_none:'' }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-control">
+                                        <label class="label pb-0">
+                                            <span class="label-text font-bold text-gray-600">Company Name</span>
+                                        </label>
+                                        <input type="text" name="company_name" value="{{ form.company_name.value|default_if_none:'' }}" class="input input-bordered w-full h-10" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card bg-white shadow-sm border border-gray-100 p-6 space-y-5 border-l-4 border-l-pink-300">
+                            
+                            <h2 class="text-sky-600 font-bold text-sm uppercase mb-2">Address & Email</h2>
+                            <div class="form-control">
+                                <label class="label pb-0">
+                                    <span class="label-text text-gray-600">Address Line 1</span>
+                                </label>
+                                <input type="text" name="address1" value="{{ form.address1.value|default_if_none:'' }}" placeholder="Enter Address" class="input input-bordered h-10 w-full" />
+                            </div>
+                             <div class="form-control">
+                                <label class="label pb-0">
+                                    <span class="label-text  text-gray-600">Address Line 2</span>
+                                </label>
+                                <input type="text" name="address2" value="{{ form.address2.value|default_if_none:'' }}" placeholder="Enter Address" class="input input-bordered h-10 w-full" />
+                            </div>
+                            <div class="form-control">
+                                <label class="label pb-0">
+                                    <span class="label-text  text-gray-600">Email</span>
+                                </label>
+                                <input type="text" name="email" value="{{ form.email.value|default_if_none:'' }}" placeholder="Enter Email" class="input input-bordered h-10 w-full" />
+                            </div>
+                            <div class="form-control">
+                                <label class="label pb-0">
+                                    <span class="label-text text-gray-600">Fax</span>
+                                </label>
+                                <input type="text" name="fax" value="{{ form.fax.value|default_if_none:'' }}" placeholder="Enter Address" class="input input-bordered h-10 w-full" />
+                            </div>
+                            
+                        </div>
+
+                        <div class="card bg-white shadow-sm border border-gray-100 p-6 space-y-4 border-l-4 border-l-pink-300">
+                            <h2 class="text-sky-600 font-bold text-sm uppercase mb-2">Location & Phone</h2>
+                            <div class="form-control">
+                                <label class="label pb-0">
+                                    <span class="label-text text-gray-600">Phone</span>
+                                </label>
+                                <input type="text" name="phone" value="{{ form.phone.value|default_if_none:'' }}" placeholder="Enter Contact" class="input input-bordered h-10 w-full" />
+                            </div>
+                            <div class="form-control">
+                                <label class="label pb-0">
+                                    <span class="label-text text-gray-600">Country Code</span>
+                                </label>
+                                <select name="country_code" class="select select-bordered h-10 min-h-0 w-full">
+                                    <option {% if not form.country_code.value %}selected{% endif %} disabled>Select Country</option>
+                                    <option {% if form.country_code.value == "US" %}selected{% endif %} value="US">USA</option>
+                                    <option {% if form.country_code.value == "LK" %}selected{% endif %} value="LK">Sri Lanka</option>
+                                </select>
+                            </div>
+                            <h2 class="text-sky-600 font-bold text-sm uppercase mt-2 mb-2">System Configuration</h2>
+                            <div class="form-control">
+                                <label class="label"><span class="label-text font-semibold">Currency</span></label>
+                                <select name="currency_type"  class="select select-bordered w-full h-10 min-h-0">
+                                    <option {% if form.currency_type.value == "USD" %}selected{% endif %} value="USD">USD</option>
+                                    <option {% if form.currency_type.value == "LKR" %}selected{% endif %} value="lKR">LKR</option>
+                                    <option {% if form.currency_type.value == "EUR" %}selected{% endif %} value="EUR">EUR</option>
+                                </select>
+                            </div>
+
+                            <div class="form-control">
+                                <label class="label"><span class="label-text font-semibold">Currency Decimal </span></label>
+                                <input type="text" value="{{ form.currency_deci.value|default_if_none:'' }}"  name="currency_deci" value="2" class="input input-bordered h-10 w-full" />
+                            </div>
+
+                            <div class="divider text-xs text-gray-400">STATUS</div>
+
+                            <div class="form-control">
+                                <label class="label cursor-pointer justify-between">
+                                    <span class="label-text font-semibold text-gray-600 text-sm">Default (defcompany)</span> 
+                                    <input type="checkbox" {% if form.company_active.value %}checked{% endif %}  name="defcompany" class="checkbox checkbox-primary checkbox-sm" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-6">
+                        {% if object %}
+                        <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100 flex items-center gap-6">
+                            <span class="text-xs font-medium text-gray-500">
+                                <i class="fa-regular fa-calendar-plus mr-1"></i> 
+                                Created at: <span class="text-gray-700">{{ object.created_at|date:"M d, Y H:i" }}</span>
+                            </span>
+                            <span class="text-xs font-medium text-gray-500">
+                                <i class="fa-regular fa-pen-to-square mr-1"></i> 
+                                Last Updated: <span class="text-gray-700">{{ object.updated_at|date:"M d, Y H:i" }}</span>
+                            </span>
+                        </div>
+                        {% endif %}
+                    </div>
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100 flex items-center gap-6">
+                            <button type="submit" class="btn btn-secondary  px-8 shadow-md">
+                                Edit 
+                            </button>
+                            <button type="button" class="btn btn-outline bg-white hover:bg-gray-100 text-gray-500 border-gray-300">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+            
+        </form>
+    </main>
+</div>
+ 
+<!-- <div class="max-w-2xl mx-auto py-8">
+    <h1 class="text-2xl font-bold mb-6 text-gray-800">Create New Company</h1>
+    
+    <form method="post" class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
+        {% csrf_token %}
+        
+        {% for field in form %}
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <p class="text-red-500 text-xs italic">{{ field.errors.0 }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="flex items-center justify-between mt-6">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg">
+                Save
+            </button>
+            <a href="{% url 'catalog:company_list' %}" class="text-gray-600 hover:text-gray-800">Cancel</a>
+        </div>
+    </form>
+</div> -->
+{% endblock %}

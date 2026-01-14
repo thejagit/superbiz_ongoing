@@ -1,0 +1,449 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Login - SuperBiz
+{% endblock title %}
+{% block content %}
+    <div class="flex min-h-screen">
+        <main class="flex-1 p-8">
+            <header class="mb-8">
+                <h1 class="text-2xl font-bold text-slate-900">User Information</h1>
+                <p class="text-slate-500 text-sm">Manage employee profiles and system access levels.</p>
+            </header>
+            <form class="space-y-6 max-w-6xl">
+                <!-- <div> -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="font-semibold text-slate-800 flex items-center">
+                                <span class=" mr-2 text-blue-500">{% include 'components/svgs/user-star.svg' %}</span>
+                                User Detail
+                            </h2>
+                            <label class="inline-flex items-center cursor-pointer">
+                                <span class="mr-3 text-sm font-medium text-slate-500">Active Status</span>
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:left-[2px]after:top-[2px]  after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
+                                </div>
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Emp No</label>
+                                <input type="text"
+                                       value="1017"
+                                       class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                       readonly>
+                            </div>
+                            <div class="relative">
+                                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Title</label>
+                                <div class="relative">
+                                    <select class="w-full appearance-none bg-white border border-slate-200 rounded-lg px-4 py-2 pr-10 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition cursor-pointer text-slate-700">
+                                        <option value="Mr">Mr.</option>
+                                        <option value="Ms">Ms.</option>
+                                        <option value="Mrs">Mrs.</option>
+                                        <option value="Dr">Dr.</option>
+                                        <option value="Rev">Rev.</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+                                        {% include 'components/svgs/chevron-down.svg' %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Full Name</label>
+                                <input type="text"
+                                       value=""
+                                       class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                       placeholder="Enter Full Name">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Preferred Name</label>
+                                <input type="text"
+                                       value=""
+                                       class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                       placeholder="Enter Preferred Name">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Date of Birth</label>
+                                <input type="date"
+                                       value=""
+                                       class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- User Avatar -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center justify-center text-center">
+                        <div class="relative w-24 h-24 mb-4">
+                            <img src="https://ui-avatars.com/api/?name=Rasika+Kumara&background=0D8ABC&color=fff"
+                                 alt="User Avatar"
+                                 class="rounded-full shadow-inner border-4 border-slate-50 " />
+                            <button class="absolute bottom-0 right-0 bg-stone-300 text-white p-1.5 rounded-full text-xs hover:bg-stone-500 transition">
+                                {% include 'components/svgs/camera.svg' %}
+                            </button>
+                        </div>
+                        <h3 class="font-bold text-slate-800">Rasika Kumara</h3>
+                        <p class="text-sm text-slate-500">Operation Executive</p>
+                    </div>
+                </div>
+                <div class="w-full grid grid-cols-1 lg:grid-cols-3 bg-transparent gap-6 mb-6 place-items-start-safe">
+                    <div class="lg:col-span-2 space-y-6">
+                        <!-- Contact Information -->
+                        <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <div class="flex items-center justify-between mb-6">
+                                <h2 class="font-semibold text-slate-700 flex items-center">
+                                    <span class=" mr-2 text-blue-500">{% include 'components/svgs/globe.svg' %}</span>
+                                    Contact Information
+                                </h2>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="md:col-span-2">
+                                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Address 1</label>
+                                    <input type="text"
+                                           value=""
+                                           class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Address 2</label>
+                                    <input type="text"
+                                           value=""
+                                           class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">City</label>
+                                    <input type="text"
+                                           value=""
+                                           class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Country</label>
+                                    <div class="relative">
+                                        <select class="w-full appearance-none bg-white border border-slate-200 rounded-lg px-4 py-2 pr-10 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition cursor-pointer text-slate-700">
+                                            <option value="sri ">Sri Lanka</option>
+                                            <option value="ind">India</option>
+                                            <option value="kor">South Korea</option>
+                                            <option value="jap">Japan</option>
+                                            <option value="rus">Russia</option>
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+                                            {% include 'components/svgs/chevron-down.svg' %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Work Contact No.</label>
+                                    <input type="text"
+                                           value=""
+                                           class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Mobile</label>
+                                    <input type="text"
+                                           value=""
+                                           class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Home</label>
+                                    <input type="text"
+                                           value=""
+                                           class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Fax</label>
+                                    <input type="text"
+                                           value=""
+                                           class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <div class="flex items-center justify-between mb-6">
+                                <h2 class="font-semibold text-slate-700 flex items-center">
+                                    <span class=" mr-2 text-blue-500">{% include 'components/svgs/briefcase.svg' %}</span>
+                                    Work Information
+                                </h2>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="md:col-span-2">
+                                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Designation</label>
+                                    <input type="text"
+                                           value=""
+                                           class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Date of Joined</label>
+                                    <input type="date"
+                                           value=""
+                                           class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Date of departed</label>
+                                    <input type="date"
+                                           value=""
+                                           class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                </div>
+                                <div class="flex flex-col space-y-3 pt-4">
+                                    <label class="flex items-center text-sm text-slate-600 cursor-pointer">
+                                        <input type="checkbox" class="rounded text-blue-600 mr-2">
+                                        Is Admin
+                                    </label>
+                                    <label class="flex items-center text-sm text-slate-600 cursor-pointer">
+                                        <input type="checkbox" class="rounded text-blue-600 mr-2">
+                                        Is Super Admin
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col ">
+                        <div class="flex-none">
+                            <h3 class="text-xs font-bold uppercase text-cyan-600 mb-4">User access settings</h3>
+                            <div class="h-40 bg-slate-50 rounded border-dashed border-2 border-slate-100"></div>
+                        </div>
+                        <div class="space-y-4 mb-4">
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-tight mb-1.5">Company</label>
+                                <div class="relative">
+                                    <select class="w-full appearance-none bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition cursor-pointer">
+                                        <option>Company A</option>
+                                        <option>Company B</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+                                        {% include 'components/svgs/chevron-down.svg' %}
+                                    </div>
+                                </div>
+                                <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-tight mb-1.5">User Role</label>
+                                <div class="relative">
+                                    <select class="w-full appearance-none bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition cursor-pointer">
+                                        <option>Administrator</option>
+                                        <option>Editor</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+                                        {% include 'components/svgs/chevron-down.svg' %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-tight mb-2">Access Permissions</label>
+                          {% for module, menus in role_data.items %}
+            <div class="mb-6">
+                 <input type="checkbox" id="{{ module }}" name="{{ module }}" value="{{ module }}" class="mr-2">
+                            <label for="{{ module }}">{{ module }}</label>,<br/>
+                <h3 class="font-bold text-blue-600 border-b pb-1"></h3>
+                
+                <div class="ml-4 mt-2">
+                    {% for menu in menus %}
+                        <div class="ont-semibold text-gray-800 mb-1">
+                            <input type="checkbox" id="{{ menu }}" name="permissions" value="{{ menu }}" class="mr-2 ml-2">
+                            <label for="{{ menu }}">{{ menu }}</label>,<br/>
+                            {% for activity in menuactivities %}
+                              <input type="checkbox" id="{{ item }}_{{ activity }}" name="{{ item }}_{{ activity }}" value="{{ activity }}" class="mr-2 ml-4">
+                              <label for="{{ item }}_{{ activity }}">{{ activity }}</label>
+                              <br/>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+                        <!-- <div 
+                                x-data="{ 
+                                    openMenus: ['administration'], 
+                                    permissions: {
+                                        admin: { name: 'Administration', selected: false, subs: { users: { selected: false, actions: { add: false, edit: false, del: false } } } },
+                                        finance: { name: 'Finance', selected: false, subs: { users: { selected: false, actions: { add: false, edit: false, del: false } } } },
+                                        inventory: { name: 'Inventory', selected: false, subs: { users: { selected: false, actions: { add: false, edit: false, del: false } } } },
+                                        express: { name: 'Express', selected: false, subs: { users: { selected: false, actions: { add: false, edit: false, del: false } } } },
+                                        assets: { name: 'Assets', selected: false, subs: { users: { selected: false, actions: { add: false, edit: false, del: false } } } }
+                                    },
+                                    toggleMenu(menu) {
+                                        this.openMenus.includes(menu) ? this.openMenus = this.openMenus.filter(m => m !== menu) : this.openMenus.push(menu);
+                                    },
+                                    updateAll(val) {
+                                        Object.keys(this.permissions).forEach(key => {
+                                            let menu = this.permissions[key];
+                                            menu.selected = val;
+                                            Object.values(menu.subs).forEach(sub => {
+                                                sub.selected = val;
+                                                if(sub.actions) Object.keys(sub.actions).forEach(a => sub.actions[a] = val);
+                                            });
+                                        });
+                                    }
+                                }"
+                                class="flex flex-col w-full overflow-y-auto custom-scrollbar h-[400px]"
+                            >
+                            <div class="flex-1  border border-slate-200 rounded-xl bg-white p-4 
+                        scrollbar-thin scrollbar-thumb-sky-200 
+                        [&::-webkit-scrollbar]:w-2
+                        [&::-webkit-scrollbar-thumb]:rounded-full">
+        
+        <div class="space-y-4">
+            <template x-for="(menuData, menuKey) in permissions" :key="menuKey">
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between group">
+                        <label class="flex items-center gap-2.5 cursor-pointer">
+                            <input type="checkbox" 
+                                   x-model="menuData.selected" 
+                                   @change="let val = menuData.selected; Object.values(menuData.subs).forEach(s => { s.selected = val; if(s.actions) Object.keys(s.actions).forEach(a => s.actions[a] = val) })"
+                                   class="rounded border-slate-300 text-sky-500 w-4 h-4 shadow-sm focus:ring-sky-500/20">
+                            <span class="text-sm font-bold text-slate-700" x-text="menuData.name"></span>
+                        </label>
+                        <button @click="toggleMenu(menuKey)" type="button" class="p-1 text-slate-400 hover:text-sky-500 transition-colors">
+                            <svg :class="openMenus.includes(menuKey) ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div x-show="openMenus.includes(menuKey)" x-collapse class="ml-2 pl-8 border-l border-slate-100 space-y-4 pt-1">
+                        <template x-for="(subData, subKey) in menuData.subs" :key="subKey">
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-2.5 cursor-pointer group">
+                                    <input type="checkbox" 
+                                           x-model="subData.selected" 
+                                           @change="let val = subData.selected; if(subData.actions) Object.keys(subData.actions).forEach(a => subData.actions[a] = val)"
+                                           class="rounded border-slate-300 text-sky-500 w-4 h-4 shadow-sm">
+                                    <span class="text-sm font-medium text-slate-600 group-hover:text-slate-900 capitalize" x-text="subKey"></span>
+                                </label>
+
+                                <div class="ml-6 pl-5 border-l border-slate-100 space-y-2.5">
+                                    <template x-for="(val, action) in subData.actions" :key="action">
+                                        <label class="flex items-center gap-2.5 text-[11px] text-slate-500 cursor-pointer hover:text-sky-500 uppercase tracking-wider font-semibold transition-all">
+                                            <input type="checkbox" x-model="subData.actions[action]" class="rounded-sm border-slate-300 text-sky-500 w-3.5 h-3.5">
+                                            <span x-text="action === 'del' ? 'Delete' : action"></span>
+                                        </label>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+        </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100">
+                <label class="flex items-center gap-3 cursor-pointer group">
+                    <input type="checkbox" 
+                        x-data="{ allChecked: false }" 
+                        @change="allChecked = $el.checked; updateAll(allChecked)" 
+                        class="rounded-md border-slate-300 text-sky-500 w-5 h-5 shadow-sm focus:ring-sky-500/20">
+                    <span class="text-xs font-black text-slate-400 group-hover:text-sky-600 uppercase tracking-widest transition-colors">Select All System Permissions</span>
+                </label>
+            </div>
+
+                        </div> -->
+                       
+                    </div> 
+                    </div>
+                </div>
+                <!-- Account Security -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h2 class="font-semibold text-slate-700 mb-6 flex items-center">
+                        <span class=" mr-2 text-blue-500">{% include 'components/svgs/globe-lock.svg' %}</span>
+                        Account Security
+                    </h2>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">User Name</label>
+                        <input type="text"
+                               value=""
+                               class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Password</label>
+                            <input type="password"
+                                   value="********"
+                                   class="w-full border border-slate-200 rounded-lg px-4 py-2 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Re-Password</label>
+                            <input type="password"
+                                   value="********"
+                                   class="w-full border border-slate-200 rounded-lg px-4 py-2 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Password Expires on (Days)</label>
+                            <input type="number" value="90"class="w-full border border-slate-200 rounded-lg px-4 py-2 outline-none">
+                        </div>
+                        <div class="flex flex-col space-y-3 pt-4">
+                            <label class="flex items-center text-sm text-slate-600 cursor-pointer">
+                                <input type="checkbox" class="rounded text-blue-600 mr-2">
+                                Change Pass Next Login
+                            </label>
+                            <label class="flex items-center text-sm text-slate-600 cursor-pointer">
+                                <input type="checkbox" class="rounded text-blue-600 mr-2">
+                                Is Admin
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-100 p-4 rounded-2xl border border-dashed border-slate-300 flex flex-col md:flex-row md:items-center pb-4 gap-4">
+                    <h2 class="font-semibold text-sky-400 flex items-center shrink-0">
+                        System Audit Information
+                    </h2>
+
+                    <div class="relative flex flex-row items-start justify-between w-full overflow-x-auto pb-4 gap-4">
+                        
+                        <div class="absolute top-4 left-6 right-6 h-px border-t border-dashed border-slate-300 z-0"></div>
+
+                            <div class="flex-1 flex flex-col items-center text-center z-10">
+                                <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white mb-6 ring-4 ring-slate-100">
+                                    {% include 'components/svgs/circle-check-big.svg' %}
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Last Access Date</p>
+                                    <p class="text-sm font-semibold text-slate-700">26-Nov-2025</p>
+                                    <p class="text-xs text-slate-400">Successful access</p>
+                                </div>
+                            </div>
+
+                            <div class="flex-1 flex flex-col items-center text-center z-10">
+                                <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white mb-6 ring-4 ring-slate-100">
+                                    {% include 'components/svgs/circle-gauge.svg' %}
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight">PW Change Date</p>
+                                    <p class="text-sm font-semibold text-slate-700">28-Nov-2023</p>
+                                    <p class="text-xs text-slate-400">Security credentials updated</p>
+                                </div>
+                            </div>
+
+                            <div class="flex-1 flex flex-col items-center text-center z-10">
+                                <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-white mb-6 ring-4 ring-slate-100">
+                                    {% include 'components/svgs/circle-user-round.svg' %}
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Created By</p>
+                                    <p class="text-sm font-semibold text-blue-600">SYSTEM_ADMIN</p>
+                                </div>
+                            </div>
+
+                            <div class="flex-1 flex flex-col items-center text-center z-10">
+                                <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white mb-6 ring-4 ring-slate-100">
+                                    {% include 'components/svgs/circle-fading-plus.svg' %}
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Created Date</p>
+                                    <p class="text-sm font-semibold text-slate-700">01-Jan-2020</p>
+                                    <p class="text-xs text-slate-400">Account initialized</p>
+                                </div>
+                            </div>
+                </div>
+                </div>
+                <div class="pt-6 flex items-center space-x-4">
+                    <button type="submit"
+                            class="bg-sky-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-sky-700 shadow-lg shadow-sky-200 transition-all active:scale-95">
+                        <i class="fas fa-save mr-2"></i> Save
+                    </button>
+                    <button type="button"
+                            class="bg-white text-slate-500 border border-slate-200 px-8 py-3 rounded-xl font-bold hover:bg-slate-50 transition-all">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+{% endblock content %}

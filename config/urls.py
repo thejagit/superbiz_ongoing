@@ -24,6 +24,7 @@ from apps.accounts.views import index
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("catalog/", include("apps.catalog.urls", namespace="catalog")),
+   # path("accounts/", include("apps.accounts.urls", namespace="accounts")),
     path("", index, name="index"),
 ]
 
