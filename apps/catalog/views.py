@@ -1,9 +1,12 @@
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView  #
 
 from apps.catalog.models.company import Company  #
+from apps.catalog.models.company_sale import CompanySale
+from apps.catalog.models.sale import Sale
 
-from .forms import CompanyForm
+from .forms import CompanyForm  #, CompanySaleForm
 
 
 # Create your views here.
@@ -23,7 +26,7 @@ class CompanyCreateView(CreateView):
        # is_active = request.POST.get("company_active") == "on"  # Checkboxes send 'on' if checked
         # This part runs if the data is valid
         # You can add custom logic here (like setting the user)
-        return super().form_valid(form)
+        return super().form_valid(form) # data save to the db
 
 
 class CompanyUpdateView(UpdateView):
@@ -41,3 +44,37 @@ class CompanyDeleteView(DeleteView):
     model = Company
     # Redirect back to the list after deleting
     success_url = reverse_lazy("catalog:company_list")
+
+class SaleListView(ListView):
+    model = Sale
+    template_name = "finance/sales_list.html"
+    context_object_name = "sales"
+
+    def get_queryset(self):
+        # This optimizes the query for the foreign key
+        return CompanySale.objects.select_related("company").all().filter(is_active=True)
+    
+class CompanySaleCreateView(CreateView):
+    model = CompanySale
+    fields = ["company", "sales_code", "sales_id_name", "is_active"]
+    #form_class = CompanySaleForm
+    template_name = "finance/company_sales_create.html"
+    success_url = reverse_lazy("catalog:sale_list")
+
+    #get data from company-table
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # get all data from company
+        context["companies"] = Company.objects.all()
+        return context
+    # This part runs if the data is valid
+    def form_valid(self, form):
+        # save data
+        return super().form_valid(form)
+    
+def get_company_sales_rows(request):
+    company_id = request.GET.get("company")
+    # Fetch sales for the selected company
+    sales = CompanySale.objects.filter(company_id=company_id) if company_id else []
+
+    return render(request, "finance/partials/sale_company.html", {"com_sales": sales})

@@ -15,6 +15,7 @@ class Company(models.Model):
     currency_deci = models.SmallIntegerField(blank=True, null=True)
     company_active=models.BooleanField(default=True)
     defcompany = models.BooleanField(default=False)
+    image=models.ImageField(upload_to="company",blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True,)
 

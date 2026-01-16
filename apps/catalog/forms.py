@@ -1,12 +1,12 @@
 from django import forms
 
-from .models.company import Company
+from .models.company import Company  #, CompanySale
 
 
 class CompanyForm(forms.ModelForm):
 
     class Meta:
-        model = Company
+        model = Company #name of the model this should be same to model folder model name
         fields = [
             "company_code",
             "company_bpcode",
@@ -22,3 +22,14 @@ class CompanyForm(forms.ModelForm):
             "company_active",
             "defcompany",
         ]
+
+# class CompanySaleForm(forms.ModelForm):
+#     class Meta:
+#         model:CompanySale
+#         field = [
+#             "Company", 
+#             "sales_code", 
+#             "sales_id_name", 
+#             "is_active"
+#             ]
+        
