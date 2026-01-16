@@ -4,9 +4,8 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView  #
 
 from apps.catalog.models.company import Company  #
 from apps.catalog.models.company_sale import CompanySale
-from apps.catalog.models.sale import Sale
 
-from .forms import CompanyForm  #, CompanySaleForm
+from .forms import CompanyForm, CompanySaleForm
 
 
 # Create your views here.
@@ -46,17 +45,21 @@ class CompanyDeleteView(DeleteView):
     success_url = reverse_lazy("catalog:company_list")
 
 class SaleListView(ListView):
-    model = Sale
+    model = "CompanySale"
+
     template_name = "finance/sales_list.html"
     context_object_name = "sales"
 
     def get_queryset(self):
         # This optimizes the query for the foreign key
-        return CompanySale.objects.select_related("company").all().filter(is_active=True)
-    
+       # Returns unique companies that have at least one active sale
+        return (
+            CompanySale.objects.all()
+            .order_by("company__company_name")
+        )
 class CompanySaleCreateView(CreateView):
     model = CompanySale
-    fields = ["company", "sales_code", "sales_id_name", "is_active"]
+    fields = ("company", "sales_code", "sales_id_name", "is_active")
     #form_class = CompanySaleForm
     template_name = "finance/company_sales_create.html"
     success_url = reverse_lazy("catalog:sale_list")
@@ -78,3 +81,21 @@ def get_company_sales_rows(request):
     sales = CompanySale.objects.filter(company_id=company_id) if company_id else []
 
     return render(request, "finance/partials/sale_company.html", {"com_sales": sales})
+
+class CompanySaleUpdateView(UpdateView):
+    model = CompanySale
+    form_class = CompanySaleForm
+    template_name = "finance/sales_edit.html"  # Reuse your existing HTML
+    success_url = reverse_lazy("catalog:sale_list")
+
+    # get data from company-table
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # This is required so the dropdown has options to show
+        context["companies"] = Company.objects.all()
+        return context
+    
+class CompanySaleDeleteView(DeleteView):
+    model = CompanySale
+    # Redirect back to the list after deleting
+    success_url = reverse_lazy("catalog:sale_list")

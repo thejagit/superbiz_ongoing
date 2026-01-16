@@ -1,6 +1,7 @@
 from django import forms
 
-from .models.company import Company  #, CompanySale
+from .models.company import Company
+from .models.company_sale import CompanySale
 
 
 class CompanyForm(forms.ModelForm):
@@ -23,13 +24,13 @@ class CompanyForm(forms.ModelForm):
             "defcompany",
         ]
 
-# class CompanySaleForm(forms.ModelForm):
-#     class Meta:
-#         model:CompanySale
-#         field = [
-#             "Company", 
-#             "sales_code", 
-#             "sales_id_name", 
-#             "is_active"
-#             ]
+class CompanySaleForm(forms.ModelForm):
+    class Meta:
+        model=CompanySale
+        fields = [
+            "company", 
+            "sales_code", 
+            "sales_id_name", 
+            "is_active"
+            ]
         

@@ -5,6 +5,8 @@ from .views import (
     CompanyDeleteView,
     CompanyListView,
     CompanySaleCreateView,
+    CompanySaleDeleteView,
+    CompanySaleUpdateView,
     CompanyUpdateView,
     SaleListView,
     get_company_sales_rows,
@@ -20,4 +22,6 @@ urlpatterns = [
     path("sales/", SaleListView.as_view(), name="sale_list"),
     path("sales/add/", CompanySaleCreateView.as_view(), name="company_sales_create"),
     path("ajax/get-sales-rows/", get_company_sales_rows, name="get_company_sales_rows"),
+    path("sales/edit/<int:pk>/", CompanySaleUpdateView.as_view(), name="sales_edit"),
+    path("sales/delete/<int:pk>/", CompanySaleDeleteView.as_view(), name="sales_delete"),
 ]
