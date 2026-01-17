@@ -113,5 +113,36 @@
             </tbody>
         </table>
     </div>
+    {% if is_paginated %}
+<div class="flex justify-center mt-8">
+    <div class="join border border-gray-200 shadow-sm">
+        
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="join-item btn btn-sm btn-ghost">«</a>
+        {% else %}
+            <button class="join-item btn btn-sm btn-disabled">«</button>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <button class="join-item btn btn-sm btn-active btn-primary">{{ num }}</button>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a href="?page={{ num }}" class="join-item btn btn-sm btn-ghost">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="join-item btn btn-sm btn-ghost">»</a>
+        {% else %}
+            <button class="join-item btn btn-sm btn-disabled">»</button>
+        {% endif %}
+        
+    </div>
+</div>
+
+<div class="text-center mt-2 text-xs text-gray-500 italic">
+    Showing page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+</div>
+{% endif %}
 </div>
 {% endblock %} 

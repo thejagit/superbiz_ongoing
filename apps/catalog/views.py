@@ -51,7 +51,9 @@ class SaleListView(ListView):
 
     template_name = "finance/sales_list.html"
     context_object_name = "sales"
-
+    # Set the number of items per page (e.g., 10)
+    paginate_by = 10
+    
     def get_queryset(self):
         # This optimizes the query for the foreign key
        # Returns unique companies that have at least one active sale
