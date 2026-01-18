@@ -60,6 +60,7 @@ class SaleListView(ListView):
         return (
             CompanySale.objects.all()
             .order_by("company__company_name")
+            .order_by("-created_at")
         )
 class CompanySaleCreateView(CreateView):
 

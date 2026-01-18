@@ -15,6 +15,11 @@
                     name: this.newName,
                     status: this.newStatus
                 });
+                // Auto-scroll to bottom after the DOM updates
+                this.$nextTick(() => {
+                    const container = this.$el.querySelector('.overflow-y-auto');
+                    container.scrollTop = container.scrollHeight;
+                });
                 // Clear inputs for next entry
                 this.newCode = '';
                 this.newName = '';
@@ -53,7 +58,11 @@
                                         <label class="label pb-0">
                                             <span class="label-text font-bold text-gray-600">Company</span>
                                         </label>
-                                        <select name="company" class="select select-bordered w-full" required>
+                                        <select name="company" class="select select-bordered w-full" required
+                                        hx-get="{% url 'catalog:get_company_sales_rows' %}" 
+                                        hx-target="#sales-table-body" 
+                                        hx-trigger="change"
+                                        class="select select-bordered w-full">
                                             <option value="">---------</option>
                                             {% for company in companies %}
                                                 <option value="{{ company.id }}">{{ company.company_code }} - {{ company.company_name }}</option>
@@ -87,16 +96,16 @@
             </div>
         </div>        
         
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 ">
             <div class="p-4 bg-gray-50 border-b flex justify-between items-center">
                 <h2 class="text-lg font-semibold text-gray-700">Sales Entry Grid</h2>
-                <button type="button" @click="addRow()" class="btn btn-sm btn-primary text-white">
+                <button type="button" @click="addRow()" class="btn btn-primary px-8 shadow-md text-white">
                     + Add to Grid
                 </button>
             </div>
-            
-            <table class="w-full text-left">
-                <thead class="bg-gray-100 text-xs uppercase text-gray-500 font-bold">
+            <div class="max-h-[400px] overflow-y-auto overflow-x-auto relative">
+            <table class="w-full text-left border-collapse">
+                <thead class="bg-gray-100 text-xs uppercase text-gray-500 font-bold sticky top-0 z-20">
                     <tr>
                         <th class="px-6 py-3">Sales Code</th>
                         <th class="px-6 py-3">Sales ID Name</th>
@@ -104,7 +113,12 @@
                         <th class="px-6 py-3 text-right">Action</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
+                 <tbody id="sales-table-body" class="divide-y divide-gray-200">
+                    <tr>
+                        <td colspan="4" class="px-6 py-10 text-center text-gray-400 italic">Select a company to view sales data.</td>
+                    </tr>
+                </tbody>    
+                <tbody  class="divide-y divide-gray-200" >                
                     <template x-if="rows.length === 0">
                         <tr>
                             <td colspan="4" class="px-6 py-10 text-center text-gray-400 italic">
@@ -125,15 +139,15 @@
                             </td>
                             <td class="px-6 py-3 text-center">
                                 <template x-if="row.status">
-                                    <span class="badge badge-success badge-outline badge-sm">Active</span>
+                                    <span class="badge badge-outline badge-success">Active</span>
                                 </template>
                                 <template x-if="!row.status">
-                                    <span class="badge badge-ghost badge-sm">Inactive</span>
+                                    <span class="badge badge-outline badge-error">Inactive</span>
                                 </template>
                                 <input type="hidden" name="grid_sales_status[]" :value="row.status">
                             </td>
                             <td class="px-6 py-3 text-right">
-                                <button type="button" @click="removeRow(index)" class="btn btn-ghost btn-xs text-red-500 hover:bg-red-50">
+                                <button type="button" @click="removeRow(index)" class="btn btn-outline btn-error text-sm font-semibold ">
                                     Remove
                                 </button>
                             </td>
@@ -141,6 +155,7 @@
                     </template>
                 </tbody>
             </table>
+            </div>
         </div>
 
         <div class="flex items-center gap-4">

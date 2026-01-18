@@ -4,13 +4,13 @@
     <td class="px-6 py-4 text-sm text-gray-600">{{ comsales.sales_id_name }}</td>
     <td class="px-6 py-4 text-center">
         {% if comsales.is_active %}
-            <span class="badge badge-success badge-sm text-white">Active</span>
+            <span class="badge badge-outline badge-success">Active</span>
         {% else %}
-            <span class="badge badge-error badge-sm text-white">Inactive</span>
+            <span class="badge badge-outline badge-error">Inactive</span>
         {% endif %}
     </td>
     <td class="px-6 py-4 text-right">
-        <button class="text-red-500 hover:text-red-700 text-sm font-semibold">Remove</button>
+        <button class="btn btn-outline btn-error text-sm font-semibold btn-disabled">Remove</button>
     </td>
 </tr>
 {% empty %}

@@ -27,6 +27,7 @@
                     <th class="px-5 py-3 border-b-2 border-gray-200">Company Name</th>
                     <th class="px-5 py-3 border-b-2 border-gray-200">Sale Name</th>
                     <th class="px-5 py-3 border-b-2 border-gray-200">Status</th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200">Created At</th>
                     <th class="px-5 py-3 border-b-2 border-gray-200 text-right ">Actions</th>
                 </tr>
             </thead>
@@ -53,6 +54,9 @@
                                 <span class="relative text-xs uppercase tracking-wider font-bold">Inactive</span>
                             </span>
                         {% endif %}
+                    </td>
+                    <td class="px-5 py-4 border-b border-gray-200 text-sm">
+                        <p class="font-medium whitespace-no-wrap">{{companysale.created_at }} </p>
                     </td>
                    <td class="px-5 py-4 border-b border-gray-200 text-sm text-right" x-data="{ open: false }">
                         <a href="{% url 'catalog:sales_edit' companysale.id %}">
