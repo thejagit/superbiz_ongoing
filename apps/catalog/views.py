@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.db import transaction
+from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView  #
@@ -15,7 +16,48 @@ class CompanyListView(ListView):
     model = Company
     template_name = "finance/company_list.html"
     context_object_name = "companies"
+    paginate_by = 10
 
+    def get_queryset(self):
+        query = self.request.GET.get("q", "").strip()
+        queryset = Company.objects.all().order_by("-id")  #
+
+        if query:
+            # logic to handle 'active' string search
+            is_active_search = None
+            if query.lower() == "active":
+                is_active_search = True
+            elif query.lower() == "inactive":
+                is_active_search = False
+
+            search_filter = (
+                Q(company_code__icontains=query)
+                | Q(company_name__icontains=query)
+                | Q(company_bpcode__icontains=query)
+            )
+
+            if is_active_search is not None:
+                search_filter |= Q(company_active=is_active_search)
+
+            queryset = queryset.filter(search_filter)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Pass the current search query to the template for pagination links
+        context["q"] = self.request.GET.get("q", "")
+        return context
+
+    def get(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        context = self.get_context_data()
+
+        # If HTMX request, return the partial which now includes the pagination
+        if request.headers.get("HX-Request"):
+            return render(request, "finance/partials/ptbcompany.html", context)
+
+        return self.render_to_response(context)
+    
 class CompanyCreateView(CreateView):
     
     model = Company

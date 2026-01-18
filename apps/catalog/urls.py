@@ -24,4 +24,5 @@ urlpatterns = [
     path("ajax/get-sales-rows/", get_company_sales_rows, name="get_company_sales_rows"),
     path("sales/edit/<int:pk>/", CompanySaleUpdateView.as_view(), name="sales_edit"),
     path("sales/delete/<int:pk>/", CompanySaleDeleteView.as_view(), name="sales_delete"),
+    #path("ajax/get-sales-rows/", companies_list_view, name="get_company_sales_rows"),
 ]
