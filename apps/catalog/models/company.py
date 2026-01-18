@@ -24,4 +24,4 @@ class Company(models.Model):
         verbose_name_plural = "Companies"
         
     def __str__(self):
-        return self.company_name
+        return f"{self.company_code}-{self.company_name}" #name diplay in admin side db table

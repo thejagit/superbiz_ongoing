@@ -89,21 +89,52 @@ class CompanyDeleteView(DeleteView):
     success_url = reverse_lazy("catalog:company_list")
 
 class SaleListView(ListView):
-    model = "CompanySale"
-
+    model = CompanySale
     template_name = "finance/sales_list.html"
     context_object_name = "sales"
-    # Set the number of items per page (e.g., 10)
-    paginate_by = 10
-    
+
     def get_queryset(self):
-        # This optimizes the query for the foreign key
-       # Returns unique companies that have at least one active sale
-        return (
-            CompanySale.objects.all()
-            .order_by("company__company_name")
-            .order_by("-created_at")
-        )
+        query = self.request.GET.get("q", "").strip()
+        # Use select_related if 'company' is a foreign key to optimize queries
+        queryset = CompanySale.objects.all().order_by("-created_at")
+        #filtering status
+        if query:
+            is_active_search = None
+            if query.lower() == "active":
+                is_active_search = True
+            elif query.lower() == "inactive":
+                is_active_search = False
+
+            search_filter = (
+                Q(sales_code__icontains=query)
+                | Q(sales_id_name__icontains=query)
+                | Q(created_at__icontains=query)
+            )
+
+            if is_active_search is not None:
+                search_filter |= Q(is_active=is_active_search)
+
+            queryset = queryset.filter(search_filter)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["q"] = self.request.GET.get("q", "")
+        return context
+
+    def get(self, request, *args, **kwargs):
+        # Let ListView handle the queryset and context generation
+        self.object_list = self.get_queryset()
+
+        # Check if it's an HTMX request
+        if request.headers.get("HX-Request"):
+            context = self.get_context_data()
+            return render(request, "finance/partials/ptbsales.html", context)
+
+        return super().get(request, *args, **kwargs)
+    
+
 class CompanySaleCreateView(CreateView):
 
     model = CompanySale
