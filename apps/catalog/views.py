@@ -23,8 +23,7 @@ class CompanyListView(ListView):
         query = self.request.GET.get("q", "").strip()
         # Default sort if none provided
         queryset = Company.objects.all().order_by("-id")  
-        # Base queryset
-        queryset = Company.objects.all()
+  
         
         # Filtering based on search query
         if query:
@@ -101,6 +100,7 @@ class SaleListView(ListView):
     model = CompanySale
     template_name = "finance/sales_list.html"
     context_object_name = "sales"
+    paginate_by = 10
 
     # Get the parameters from the URL
     def get_queryset(self):
@@ -138,11 +138,12 @@ class SaleListView(ListView):
 
         return queryset.order_by(sort_param) if sort_param else queryset.order_by("-id")
     
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["q"] = self.request.GET.get("q", "")
         return context
+    
 
     def get(self, request, *args, **kwargs):
         # Let ListView handle the queryset and context generation
