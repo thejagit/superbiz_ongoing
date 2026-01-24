@@ -55,17 +55,62 @@
     <span class="htmx-indicator loading loading-spinner loading-sm ml-2"></span>
 </div> -->
     <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
-        <table class="min-w-full leading-normal">
-            <thead>
-                <tr class="bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    <!-- <th class="px-5 py-3 border-b-2 border-gray-200">Company Name</th> -->
-                    <th class="px-5 py-3 border-b-2 border-gray-200">Sale Name</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200">Status</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200">Created At</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 text-right ">Actions</th>
-                </tr>
+        <table class="table table-zebra table-pin-cols">
+            <!-- head -->
+            <thead class="bg-base-500">
+            <tr class=" text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                <!-- <th class=" bg-gray-200">Sale Name</th> -->
+                <th class="px-5 py-4 border-b-2 border-gray-200 bg-gray-200">
+                        <a 
+                        href="?sort={% if request.GET.sort == 'sales_id_name' %}-sales_id_name{% else %}sales_id_name{% endif %}" 
+                        class="flex items-center hover:text-blue-600 transition-colors">
+                           Sale Name
+                            <span class="ml-2 {% if 'sales_id_name' in request.GET.sort %}text-blue-500{% else %}text-gray-400{% endif %}">
+                                {% if request.GET.sort == 'sales_id_name' %}
+                                    {% include 'components/svgs/utility/move-down.svg' %}
+                                {% elif request.GET.sort == '-sales_id_name' %}
+                                    {% include 'components/svgs/utility/move-up.svg' %}
+                                {% else %}
+                                    {% include 'components/svgs/utility/arrow-down-up.svg' %}
+                                {% endif %}
+                            </span>
+                        </a>
+                </th>
+                <th class="px-5 py-4 border-b-2 border-gray-200 bg-gray-200">
+                        <a 
+                        href="?sort={% if request.GET.sort == 'is_active' %}-is_active{% else %}is_active{% endif %}" 
+                        class="flex items-center hover:text-blue-600 transition-colors">
+                           Status
+                            <span class="ml-2 {% if 'is_active' in request.GET.sort %}text-blue-500{% else %}text-gray-400{% endif %}">
+                                {% if request.GET.sort == 'is_active' %}
+                                    {% include 'components/svgs/utility/move-down.svg' %}
+                                {% elif request.GET.sort == '-is_active' %}
+                                    {% include 'components/svgs/utility/move-up.svg' %}
+                                {% else %}
+                                    {% include 'components/svgs/utility/arrow-down-up.svg' %}
+                                {% endif %}
+                            </span>
+                        </a>
+                </th>
+                <th class="px-5 py-4 border-b-2 border-gray-200 bg-gray-200">
+                        <a 
+                        href="?sort={% if request.GET.sort == 'created_at' %}-created_at{% else %}created_at{% endif %}" 
+                        class="flex items-center hover:text-blue-600 transition-colors">
+                           Created At
+                            <span class="ml-2 {% if 'created_at' in request.GET.sort %}text-blue-500{% else %}text-gray-400{% endif %}">
+                                {% if request.GET.sort == 'created_at' %}
+                                    {% include 'components/svgs/utility/move-down.svg' %}
+                                {% elif request.GET.sort == '-created_at' %}
+                                    {% include 'components/svgs/utility/move-up.svg' %}
+                                {% else %}
+                                    {% include 'components/svgs/utility/arrow-down-up.svg' %}
+                                {% endif %}
+                            </span>
+                        </a>
+                </th>
+                <th class=" bg-gray-200 text-right">Actions</th>
+            </tr>
             </thead>
-            
             <tbody id="sales-table-body" class="text-gray-700">
                 {% include "finance/partials/ptbsales.html" %}
             </tbody>

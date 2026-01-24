@@ -19,9 +19,14 @@ class CompanyListView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
+        # Get the parameters from the URL
         query = self.request.GET.get("q", "").strip()
-        queryset = Company.objects.all().order_by("-id")  #
-
+        # Default sort if none provided
+        queryset = Company.objects.all().order_by("-id")  
+        # Base queryset
+        queryset = Company.objects.all()
+        
+        # Filtering based on search query
         if query:
             # logic to handle 'active' string search
             is_active_search = None
@@ -40,7 +45,11 @@ class CompanyListView(ListView):
                 search_filter |= Q(company_active=is_active_search)
 
             queryset = queryset.filter(search_filter)
-        return queryset
+
+        # Handle sorting
+        sort_param = self.request.GET.get("sort", "")
+     
+        return queryset.order_by(sort_param) if sort_param else queryset.order_by("-id")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -93,10 +102,18 @@ class SaleListView(ListView):
     template_name = "finance/sales_list.html"
     context_object_name = "sales"
 
+    # Get the parameters from the URL
     def get_queryset(self):
         query = self.request.GET.get("q", "").strip()
-        # Use select_related if 'company' is a foreign key to optimize queries
+        ## Use select_related if 'company' is a foreign key to optimize queries
+        
+        # Default sort if none provided
         queryset = CompanySale.objects.all().order_by("-created_at")
+        # Base queryset
+        queryset = CompanySale.objects.all()
+
+        # Filtering based on search query
+
         #filtering status
         if query:
             is_active_search = None
@@ -116,8 +133,12 @@ class SaleListView(ListView):
 
             queryset = queryset.filter(search_filter)
 
-        return queryset
+        # Handle sorting
+        sort_param = self.request.GET.get("sort", "")
 
+        return queryset.order_by(sort_param) if sort_param else queryset.order_by("-id")
+    
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["q"] = self.request.GET.get("q", "")
